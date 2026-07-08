@@ -105,17 +105,17 @@ const OrganizationDashboard = () => {
         </button>
       </div>
 
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid var(--border)' }}>
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', background: 'rgba(255, 255, 255, 0.5)', padding: '0.5rem', borderRadius: '99px', width: 'fit-content', border: '1px solid rgba(0,0,0,0.05)' }}>
         {['ALL', 'PUBLISHED', 'DRAFT', 'ARCHIVED'].map(status => (
           <button
             key={status}
             onClick={() => setFilter(status)}
             style={{
-              background: 'none', border: 'none', padding: '0.75rem 0', cursor: 'pointer',
-              color: filter === status ? 'var(--primary)' : 'var(--text-muted)',
-              fontWeight: filter === status ? 600 : 500,
-              borderBottom: filter === status ? '2px solid var(--primary)' : '2px solid transparent',
-              marginBottom: '-1px'
+              background: filter === status ? 'var(--surface-dark)' : 'transparent', border: 'none', padding: '0.6rem 1.25rem', cursor: 'pointer',
+              color: filter === status ? 'var(--primary)' : 'var(--text-main)',
+              fontWeight: filter === status ? 700 : 500,
+              borderRadius: '99px',
+              transition: 'var(--transition)'
             }}
           >
             {status === 'ALL' ? 'All Opportunities' : status.charAt(0) + status.slice(1).toLowerCase()}
@@ -137,9 +137,9 @@ const OrganizationDashboard = () => {
                 <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '0.5rem' }}>
                   <h3 style={{ margin: 0, fontSize: '1.2rem' }}>{opp.title}</h3>
                   <span style={{ 
-                    padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 600,
-                    background: opp.status === 'PUBLISHED' ? '#D1FAE5' : opp.status === 'DRAFT' ? '#FEF3C7' : '#F3F4F6',
-                    color: opp.status === 'PUBLISHED' ? '#059669' : opp.status === 'DRAFT' ? '#D97706' : '#6B7280'
+                    padding: '0.35rem 0.85rem', borderRadius: '99px', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.02em', textTransform: 'uppercase',
+                    background: opp.status === 'PUBLISHED' ? 'rgba(168, 224, 99, 0.15)' : opp.status === 'DRAFT' ? 'rgba(251, 191, 36, 0.15)' : 'rgba(0, 0, 0, 0.05)',
+                    color: opp.status === 'PUBLISHED' ? '#4d8a1c' : opp.status === 'DRAFT' ? '#D97706' : 'var(--text-muted)'
                   }}>
                     {opp.status}
                   </span>

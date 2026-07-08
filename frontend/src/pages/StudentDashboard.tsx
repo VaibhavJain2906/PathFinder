@@ -107,7 +107,7 @@ const StudentDashboard = () => {
       {/* Search & Filters */}
       <div className="glass-card" style={{ padding: '1.25rem', marginBottom: '2rem' }}>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <div style={{ flex: '1 1 300px', display: 'flex', alignItems: 'center', background: 'var(--bg-white)', border: '1px solid var(--border)', borderRadius: '10px', padding: '0.5rem 1rem' }}>
+          <div style={{ flex: '1 1 300px', display: 'flex', alignItems: 'center', background: 'var(--bg-white)', border: '1px solid var(--border)', borderRadius: '12px', padding: '0.5rem 1.25rem', boxShadow: 'var(--shadow-sm) inset', transition: 'var(--transition)' }}>
             <Search size={20} style={{ color: 'var(--text-muted)', marginRight: '0.5rem', flexShrink: 0 }} />
             <input 
               type="text" placeholder="Search by title or description..." 
@@ -124,7 +124,7 @@ const StudentDashboard = () => {
             <option value="HACKATHON">Hackathons</option>
             <option value="FELLOWSHIP">Fellowships</option>
           </select>
-          <select className="form-input" style={{ flex: '0 0 140px' }} value={sortBy} onChange={e => setSortBy(e.target.value)}>
+          <select className="form-input" style={{ flex: '0 0 140px', padding: '0.85rem 1.25rem' }} value={sortBy} onChange={e => setSortBy(e.target.value)}>
             <option value="newest">Newest</option>
             <option value="deadline">Deadline</option>
             <option value="title">A–Z</option>
@@ -151,19 +151,19 @@ const StudentDashboard = () => {
               </button>
 
               {/* Category + Featured */}
-              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                <span style={{ padding: '0.25rem 0.75rem', borderRadius: '999px', background: 'var(--accent-bg)', color: 'var(--primary)', fontSize: '0.75rem', fontWeight: 600 }}>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+                <span style={{ padding: '0.35rem 0.85rem', borderRadius: '999px', background: 'var(--accent-bg)', color: 'var(--primary)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.02em', textTransform: 'uppercase' }}>
                   {opp.category}
                 </span>
                 {opp.isFeatured && (
-                  <span style={{ padding: '0.25rem 0.5rem', borderRadius: '999px', background: 'rgba(245,158,11,0.1)', color: '#F59E0B', fontSize: '0.7rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                  <span style={{ padding: '0.35rem 0.85rem', borderRadius: '999px', background: 'rgba(251, 191, 36, 0.15)', color: '#D97706', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.02em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                     <Star size={12} /> Featured
                   </span>
                 )}
                 {getDeadlineBadge(opp.deadline)}
               </div>
 
-              <h3 style={{ fontSize: '1.15rem', marginBottom: '0.25rem' }}>{opp.title}</h3>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', fontWeight: 800 }}>{opp.title}</h3>
               <p style={{ color: 'var(--text-main)', fontWeight: 500, fontSize: '0.875rem', marginBottom: '0.75rem' }}>
                 {opp.organization.companyName}
               </p>

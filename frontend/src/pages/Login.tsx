@@ -43,14 +43,19 @@ const Login = () => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem' }}>
-      <div className="glass-card" style={{ width: '100%', maxWidth: '400px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', borderRadius: '12px', background: 'var(--accent-bg)', color: 'var(--primary)', marginBottom: '1rem' }}>
-            <User size={24} />
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem', background: 'var(--gradient-dark)' }}>
+      <div className="glass-card" style={{ width: '100%', maxWidth: '420px', background: 'var(--surface-dark)', borderColor: 'rgba(255, 255, 255, 0.05)', position: 'relative', overflow: 'hidden' }}>
+        
+        {/* Glow Effects */}
+        <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '150px', height: '150px', background: 'rgba(168, 224, 99, 0.1)', filter: 'blur(50px)', borderRadius: '50%' }} />
+        <div style={{ position: 'absolute', bottom: '-50px', left: '-50px', width: '150px', height: '150px', background: 'rgba(184, 169, 247, 0.1)', filter: 'blur(50px)', borderRadius: '50%' }} />
+
+        <div style={{ textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(168, 224, 99, 0.15)', color: 'var(--primary)', marginBottom: '1.25rem' }}>
+            <User size={28} />
           </div>
-          <h2>Welcome back</h2>
-          <p style={{ color: 'var(--text-muted)' }}>Enter your details to access your account.</p>
+          <h2 style={{ color: '#ffffff', fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>Welcome back</h2>
+          <p style={{ color: '#a0a0b0' }}>Enter your details to access your account.</p>
         </div>
 
         {error && (
@@ -59,13 +64,14 @@ const Login = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ position: 'relative', zIndex: 1 }}>
           <div className="form-group">
-            <label className="form-label" htmlFor="email">Email</label>
+            <label className="form-label" htmlFor="email" style={{ color: '#e2e8f0' }}>Email</label>
             <input
               id="email"
               type="email"
-              className="form-input"
+              className="form-input form-input-light"
+              style={{ background: 'rgba(255, 255, 255, 0.05)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.1)' }}
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -73,14 +79,15 @@ const Login = () => {
             />
           </div>
           <div className="form-group">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <label className="form-label" htmlFor="password" style={{ marginBottom: 0 }}>Password</label>
-              <Link to="/forgot-password" style={{ fontSize: '0.875rem', color: 'var(--primary)', textDecoration: 'none' }}>Forgot password?</Link>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <label className="form-label" htmlFor="password" style={{ marginBottom: 0, color: '#e2e8f0' }}>Password</label>
+              <Link to="/forgot-password" style={{ fontSize: '0.875rem', color: 'var(--primary)', textDecoration: 'none', fontWeight: 500 }}>Forgot password?</Link>
             </div>
             <input
               id="password"
               type="password"
-              className="form-input"
+              className="form-input form-input-light"
+              style={{ background: 'rgba(255, 255, 255, 0.05)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.1)' }}
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -88,13 +95,13 @@ const Login = () => {
             />
           </div>
           
-          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }} disabled={loading}>
+          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1.5rem', padding: '1rem' }} disabled={loading}>
             {loading ? 'Signing in...' : <><LogIn size={18} style={{ marginRight: '8px' }} /> Sign in</>}
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-          Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: '500', textDecoration: 'none' }}>Sign up</Link>
+        <div style={{ textAlign: 'center', marginTop: '2rem', fontSize: '0.9rem', color: '#a0a0b0', position: 'relative', zIndex: 1 }}>
+          Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: '600', textDecoration: 'none' }}>Sign up</Link>
         </div>
       </div>
     </div>

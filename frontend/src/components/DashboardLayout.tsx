@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { LogOut, LayoutDashboard, PlusCircle, User, Briefcase, Sparkles, PieChart, Search, Bell, Bookmark, Users } from 'lucide-react';
+import { LogOut, LayoutDashboard, PlusCircle, User, Briefcase, Sparkles, PieChart, Search, Bell, Bookmark, Users, Compass } from 'lucide-react';
 
 const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 'STUDENT' | 'ORGANIZATION' | 'ADMIN' }) => {
   const navigate = useNavigate();
@@ -54,14 +54,18 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-light)' }}>
-      {/* Sidebar */}
-      <div style={{ width: '260px', background: 'var(--bg-white)', borderRight: '1px solid var(--border)', display: 'flex', flexDirection: 'column', padding: '1.5rem', flexShrink: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2.5rem', color: 'var(--primary)' }}>
-          <Briefcase size={28} />
-          <h2 style={{ margin: 0, fontSize: '1.25rem' }}>PathFinder</h2>
+      {/* Sidebar - Dark Charcoal theme for confidence/contrast */}
+      <div style={{ width: '280px', background: 'var(--bg-dark)', borderRight: '1px solid rgba(255, 255, 255, 0.05)', display: 'flex', flexDirection: 'column', padding: '2rem 1.5rem', flexShrink: 0 }}>
+        
+        {/* Brand */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={() => navigate('/')}>
+          <div style={{ background: 'var(--primary)', color: 'var(--bg-dark)', padding: '0.5rem', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 10px rgba(168, 224, 99, 0.3)' }}>
+            <Compass size={24} />
+          </div>
+          <h2 style={{ margin: 0, fontSize: '1.4rem', color: '#ffffff', letterSpacing: '-0.02em', fontWeight: 800 }}>PathFinder</h2>
         </div>
         
-        <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+        <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
@@ -69,13 +73,26 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
                 key={item.path} 
                 to={item.path} 
                 style={{ 
-                  display: 'flex', alignItems: 'center', gap: '0.75rem', 
-                  padding: '0.75rem 1rem', borderRadius: '10px',
-                  background: isActive ? 'var(--accent-bg)' : 'transparent',
-                  color: isActive ? 'var(--primary)' : 'var(--text-muted)',
-                  textDecoration: 'none', fontWeight: 500,
+                  display: 'flex', alignItems: 'center', gap: '0.85rem', 
+                  padding: '0.85rem 1.25rem', borderRadius: '12px',
+                  background: isActive ? 'rgba(168, 224, 99, 0.1)' : 'transparent',
+                  color: isActive ? 'var(--primary)' : '#a0a0b0',
+                  textDecoration: 'none', fontWeight: isActive ? 600 : 500,
                   transition: 'var(--transition)',
-                  fontSize: '0.925rem',
+                  fontSize: '0.95rem',
+                  border: isActive ? '1px solid rgba(168, 224, 99, 0.2)' : '1px solid transparent'
+                }}
+                onMouseEnter={e => {
+                  if (!isActive) {
+                    (e.currentTarget as HTMLElement).style.color = 'var(--primary)';
+                    (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.03)';
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (!isActive) {
+                    (e.currentTarget as HTMLElement).style.color = '#a0a0b0';
+                    (e.currentTarget as HTMLElement).style.background = 'transparent';
+                  }
                 }}
               >
                 {item.icon}
@@ -85,24 +102,50 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
           })}
 
           {/* Shared items */}
-          <div style={{ borderTop: '1px solid var(--border)', margin: '0.75rem 0', paddingTop: '0.75rem' }}>
+          <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', margin: '1rem 0', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             <Link to="/search" style={{
-              display: 'flex', alignItems: 'center', gap: '0.75rem',
-              padding: '0.75rem 1rem', borderRadius: '10px',
-              background: location.pathname === '/search' ? 'var(--accent-bg)' : 'transparent',
-              color: location.pathname === '/search' ? 'var(--primary)' : 'var(--text-muted)',
-              textDecoration: 'none', fontWeight: 500, fontSize: '0.925rem',
+              display: 'flex', alignItems: 'center', gap: '0.85rem',
+              padding: '0.85rem 1.25rem', borderRadius: '12px',
+              background: location.pathname === '/search' ? 'rgba(168, 224, 99, 0.1)' : 'transparent',
+              color: location.pathname === '/search' ? 'var(--primary)' : '#a0a0b0',
+              textDecoration: 'none', fontWeight: location.pathname === '/search' ? 600 : 500, fontSize: '0.95rem',
               transition: 'var(--transition)',
+              border: location.pathname === '/search' ? '1px solid rgba(168, 224, 99, 0.2)' : '1px solid transparent'
+            }}
+            onMouseEnter={e => {
+              if (location.pathname !== '/search') {
+                (e.currentTarget as HTMLElement).style.color = 'var(--primary)';
+                (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.03)';
+              }
+            }}
+            onMouseLeave={e => {
+              if (location.pathname !== '/search') {
+                (e.currentTarget as HTMLElement).style.color = '#a0a0b0';
+                (e.currentTarget as HTMLElement).style.background = 'transparent';
+              }
             }}>
               <Search size={20} /> Search
             </Link>
             <Link to="/notifications" style={{
-              display: 'flex', alignItems: 'center', gap: '0.75rem',
-              padding: '0.75rem 1rem', borderRadius: '10px',
-              background: location.pathname === '/notifications' ? 'var(--accent-bg)' : 'transparent',
-              color: location.pathname === '/notifications' ? 'var(--primary)' : 'var(--text-muted)',
-              textDecoration: 'none', fontWeight: 500, fontSize: '0.925rem',
+              display: 'flex', alignItems: 'center', gap: '0.85rem',
+              padding: '0.85rem 1.25rem', borderRadius: '12px',
+              background: location.pathname === '/notifications' ? 'rgba(168, 224, 99, 0.1)' : 'transparent',
+              color: location.pathname === '/notifications' ? 'var(--primary)' : '#a0a0b0',
+              textDecoration: 'none', fontWeight: location.pathname === '/notifications' ? 600 : 500, fontSize: '0.95rem',
               transition: 'var(--transition)',
+              border: location.pathname === '/notifications' ? '1px solid rgba(168, 224, 99, 0.2)' : '1px solid transparent'
+            }}
+            onMouseEnter={e => {
+              if (location.pathname !== '/notifications') {
+                (e.currentTarget as HTMLElement).style.color = 'var(--primary)';
+                (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.03)';
+              }
+            }}
+            onMouseLeave={e => {
+              if (location.pathname !== '/notifications') {
+                (e.currentTarget as HTMLElement).style.color = '#a0a0b0';
+                (e.currentTarget as HTMLElement).style.background = 'transparent';
+              }
             }}>
               <Bell size={20} /> 
               Notifications
@@ -110,7 +153,7 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
                 <span style={{
                   marginLeft: 'auto', background: '#EF4444', color: 'white',
                   borderRadius: '999px', padding: '0.1rem 0.5rem', fontSize: '0.7rem', fontWeight: 700,
-                  minWidth: '20px', textAlign: 'center',
+                  minWidth: '20px', textAlign: 'center', boxShadow: '0 2px 4px rgba(239, 68, 68, 0.4)'
                 }}>
                   {unreadCount > 9 ? '9+' : unreadCount}
                 </span>
@@ -119,15 +162,34 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
           </div>
         </nav>
 
-        <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1.5rem' }}>
-          <button onClick={handleLogout} className="btn btn-outline" style={{ width: '100%', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+        <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '1.5rem' }}>
+          <button 
+            onClick={handleLogout} 
+            style={{ 
+              width: '100%', display: 'flex', gap: '0.5rem', justifyContent: 'center', alignItems: 'center',
+              padding: '0.85rem 1.25rem', borderRadius: '99px',
+              background: 'rgba(255, 255, 255, 0.05)', color: '#ffffff',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer', transition: 'var(--transition)'
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.background = 'rgba(248, 113, 113, 0.15)';
+              (e.currentTarget as HTMLElement).style.color = '#f87171';
+              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(248, 113, 113, 0.3)';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.05)';
+              (e.currentTarget as HTMLElement).style.color = '#ffffff';
+              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.1)';
+            }}
+          >
             <LogOut size={18} /> Logout
           </button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div style={{ flex: 1, padding: '2rem', overflowY: 'auto' }}>
+      <div style={{ flex: 1, padding: '3rem 2rem', overflowY: 'auto' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           {children}
         </div>

@@ -132,7 +132,7 @@ const AdminDashboard = () => {
         </button>
       </div>
 
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '1px solid var(--border)' }}>
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', background: 'rgba(255, 255, 255, 0.5)', padding: '0.5rem', borderRadius: '99px', width: 'fit-content', border: '1px solid rgba(0,0,0,0.05)' }}>
         {[
           { id: 'OVERVIEW', label: 'Overview', icon: <Activity size={18} /> },
           { id: 'USERS', label: 'Users', icon: <Users size={18} /> },
@@ -142,11 +142,11 @@ const AdminDashboard = () => {
           <button
             key={tab.id} onClick={() => setActiveTab(tab.id as any)}
             style={{
-              background: 'none', border: 'none', padding: '0.75rem 1rem', cursor: 'pointer',
-              color: activeTab === tab.id ? 'var(--primary)' : 'var(--text-muted)',
-              fontWeight: activeTab === tab.id ? 600 : 500,
-              borderBottom: activeTab === tab.id ? '2px solid var(--primary)' : '2px solid transparent',
-              marginBottom: '-1px', display: 'flex', alignItems: 'center', gap: '0.5rem'
+              background: activeTab === tab.id ? 'var(--surface-dark)' : 'transparent', border: 'none', padding: '0.6rem 1.25rem', cursor: 'pointer',
+              color: activeTab === tab.id ? 'var(--primary)' : 'var(--text-main)',
+              fontWeight: activeTab === tab.id ? 700 : 500,
+              borderRadius: '99px',
+              transition: 'var(--transition)', display: 'flex', alignItems: 'center', gap: '0.5rem'
             }}
           >
             {tab.icon} {tab.label}
@@ -158,15 +158,15 @@ const AdminDashboard = () => {
         <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
             <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3B82F6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Users size={24} /></div>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(168, 224, 99, 0.15)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Users size={24} /></div>
               <div><p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Total Users</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalUsers}</h2></div>
             </div>
             <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(139, 92, 246, 0.1)', color: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Briefcase size={24} /></div>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(184, 169, 247, 0.15)', color: 'var(--secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Briefcase size={24} /></div>
               <div><p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Opportunities</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalOpportunities}</h2></div>
             </div>
             <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.1)', color: '#10B981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><FileText size={24} /></div>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(6, 182, 212, 0.1)', color: '#06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><FileText size={24} /></div>
               <div><p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Applications</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalApplications}</h2></div>
             </div>
           </div>
@@ -238,7 +238,7 @@ const AdminDashboard = () => {
                 <tr key={user.id} style={{ borderBottom: '1px solid var(--border)' }}>
                   <td style={{ padding: '1rem', fontWeight: 500 }}>{user.email}</td>
                   <td style={{ padding: '1rem' }}>
-                    <span style={{ padding: '0.2rem 0.6rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600, background: 'var(--accent-bg)', color: 'var(--primary)' }}>
+                    <span style={{ padding: '0.2rem 0.6rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600, background: 'rgba(184, 169, 247, 0.15)', color: 'var(--secondary)' }}>
                       {user.role}
                     </span>
                   </td>
