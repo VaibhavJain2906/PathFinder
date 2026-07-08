@@ -162,6 +162,24 @@ router.put('/:id/withdraw', authenticate, requireRole('STUDENT'), async (req: Au
 // Get Application Timeline
 router.get('/:id/timeline', authenticate, async (req: AuthRequest, res) => {
   try {
+    const application = await prisma.application.findUnique({
+      where: { id: req.params.id as string },
+      include: {
+        student: true,
+        opportunity: { include: { organization: true } }
+      }
+    });
+
+    if (!application) return res.status(404).json({ error: 'Application not found' });
+
+    // Verify ownership
+    const isOwnerStudent = application.student.userId === req.user!.userId;
+    const isOwnerOrg = application.opportunity.organization.userId === req.user!.userId;
+    
+    if (!isOwnerStudent && !isOwnerOrg && req.user!.role !== 'ADMIN') {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+
     const events = await prisma.applicationEvent.findMany({
       where: { applicationId: req.params.id as string },
       orderBy: { createdAt: 'desc' }
@@ -212,6 +230,14 @@ router.put('/:id/status', authenticate, requireRole('ORGANIZATION'), async (req:
   try {
     const { status, notes } = req.body;
 
+    // Verify ownership
+    const orgProfile = await prisma.organizationProfile.findUnique({ where: { userId: req.user!.userId } });
+    const targetApp = await prisma.application.findUnique({ where: { id: req.params.id as string }, include: { opportunity: true } });
+    
+    if (!targetApp || targetApp.opportunity.orgId !== orgProfile?.id) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+
     const application = await prisma.application.update({
       where: { id: req.params.id as string },
       data: { status, notes: notes || undefined },
@@ -246,6 +272,19 @@ router.put('/batch/status', authenticate, requireRole('ORGANIZATION'), async (re
     const { applicationIds, status } = req.body;
     if (!Array.isArray(applicationIds) || !status) {
       return res.status(400).json({ error: 'applicationIds array and status required' });
+    }
+
+    const orgProfile = await prisma.organizationProfile.findUnique({ where: { userId: req.user!.userId } });
+    if (!orgProfile) return res.status(403).json({ error: 'Forbidden' });
+
+    // Verify all applications belong to this organization
+    const appsToUpdate = await prisma.application.findMany({
+      where: { id: { in: applicationIds } },
+      include: { opportunity: true }
+    });
+    
+    if (appsToUpdate.length !== applicationIds.length || appsToUpdate.some(app => app.opportunity.orgId !== orgProfile.id)) {
+      return res.status(403).json({ error: 'Forbidden' });
     }
 
     const results = [];
