@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DashboardLayout from '../components/DashboardLayout';
+import { useLocation } from 'react-router-dom';
 import { Users, Briefcase, FileText, CheckCircle, Clock, ShieldAlert, Download, Server, HardDrive, Cpu, Activity, Trash2, Search } from 'lucide-react';
 
 const API = 'http://localhost:5000';
@@ -11,9 +12,17 @@ const AdminDashboard = () => {
   const [opportunitiesData, setOpportunitiesData] = useState<any[]>([]);
   const [healthData, setHealthData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'USERS' | 'OPPORTUNITIES' | 'SYSTEM'>('OVERVIEW');
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'USERS' | 'OPPORTUNITIES' | 'SYSTEM'>(
+    location.pathname.includes('/users') ? 'USERS' : 'OVERVIEW'
+  );
   const [userSearch, setUserSearch] = useState('');
   const [oppSearch, setOppSearch] = useState('');
+
+  useEffect(() => {
+    if (location.pathname.includes('/users')) setActiveTab('USERS');
+    else if (location.pathname.includes('/dashboard')) setActiveTab('OVERVIEW');
+  }, [location.pathname]);
 
   const fetchDashboardData = async () => {
     try {
