@@ -61,7 +61,7 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
         
         {/* Brand */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={() => navigate('/')}>
-          <div style={{ background: 'var(--primary)', color: 'var(--bg-dark)', padding: '0.5rem', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 10px rgba(168, 224, 99, 0.3)' }}>
+          <div style={{ background: 'var(--primary)', color: 'var(--bg-dark)', padding: '0.5rem', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 10px rgba(198, 142, 88, 0.3)' }}>
             <Compass size={24} />
           </div>
           <h2 style={{ margin: 0, fontSize: '1.4rem', color: '#ffffff', letterSpacing: '-0.02em', fontWeight: 800 }}>PathFinder</h2>
@@ -77,12 +77,12 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
                 style={{ 
                   display: 'flex', alignItems: 'center', gap: '0.85rem', 
                   padding: '0.85rem 1.25rem', borderRadius: '12px',
-                  background: isActive ? 'rgba(168, 224, 99, 0.1)' : 'transparent',
+                  background: isActive ? 'var(--accent-bg)' : 'transparent',
                   color: isActive ? 'var(--primary)' : '#a0a0b0',
                   textDecoration: 'none', fontWeight: isActive ? 600 : 500,
                   transition: 'var(--transition)',
                   fontSize: '0.95rem',
-                  border: isActive ? '1px solid rgba(168, 224, 99, 0.2)' : '1px solid transparent'
+                  border: isActive ? '1px solid var(--accent-bg)' : '1px solid transparent'
                 }}
                 onMouseEnter={e => {
                   if (!isActive) {
@@ -108,11 +108,11 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
             <Link to="/search" style={{
               display: 'flex', alignItems: 'center', gap: '0.85rem',
               padding: '0.85rem 1.25rem', borderRadius: '12px',
-              background: location.pathname === '/search' ? 'rgba(168, 224, 99, 0.1)' : 'transparent',
+              background: location.pathname === '/search' ? 'var(--accent-bg)' : 'transparent',
               color: location.pathname === '/search' ? 'var(--primary)' : '#a0a0b0',
               textDecoration: 'none', fontWeight: location.pathname === '/search' ? 600 : 500, fontSize: '0.95rem',
               transition: 'var(--transition)',
-              border: location.pathname === '/search' ? '1px solid rgba(168, 224, 99, 0.2)' : '1px solid transparent'
+              border: location.pathname === '/search' ? '1px solid var(--accent-bg)' : '1px solid transparent'
             }}
             onMouseEnter={e => {
               if (location.pathname !== '/search') {
@@ -131,11 +131,11 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
             <Link to="/notifications" style={{
               display: 'flex', alignItems: 'center', gap: '0.85rem',
               padding: '0.85rem 1.25rem', borderRadius: '12px',
-              background: location.pathname === '/notifications' ? 'rgba(168, 224, 99, 0.1)' : 'transparent',
+              background: location.pathname === '/notifications' ? 'var(--accent-bg)' : 'transparent',
               color: location.pathname === '/notifications' ? 'var(--primary)' : '#a0a0b0',
               textDecoration: 'none', fontWeight: location.pathname === '/notifications' ? 600 : 500, fontSize: '0.95rem',
               transition: 'var(--transition)',
-              border: location.pathname === '/notifications' ? '1px solid rgba(168, 224, 99, 0.2)' : '1px solid transparent'
+              border: location.pathname === '/notifications' ? '1px solid var(--accent-bg)' : '1px solid transparent'
             }}
             onMouseEnter={e => {
               if (location.pathname !== '/notifications') {
@@ -213,7 +213,7 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
 
       {/* Main Content */}
       <div style={{ flex: 1, padding: '3rem 2rem', overflowY: 'auto' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <div className="animate-fade-in-up" style={{ maxWidth: '1100px', margin: '0 auto' }}>
           {children}
         </div>
       </div>

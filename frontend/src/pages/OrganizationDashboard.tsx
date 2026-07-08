@@ -138,8 +138,8 @@ const OrganizationDashboard = () => {
                   <h3 style={{ margin: 0, fontSize: '1.2rem' }}>{opp.title}</h3>
                   <span style={{ 
                     padding: '0.35rem 0.85rem', borderRadius: '99px', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.02em', textTransform: 'uppercase',
-                    background: opp.status === 'PUBLISHED' ? 'rgba(168, 224, 99, 0.15)' : opp.status === 'DRAFT' ? 'rgba(251, 191, 36, 0.15)' : 'rgba(0, 0, 0, 0.05)',
-                    color: opp.status === 'PUBLISHED' ? '#4d8a1c' : opp.status === 'DRAFT' ? '#D97706' : 'var(--text-secondary)'
+                    background: opp.status === 'PUBLISHED' ? 'var(--accent-bg)' : opp.status === 'DRAFT' ? 'rgba(251, 191, 36, 0.15)' : 'rgba(0, 0, 0, 0.05)',
+                    color: opp.status === 'PUBLISHED' ? 'var(--primary)' : opp.status === 'DRAFT' ? '#D97706' : 'var(--text-secondary)'
                   }}>
                     {opp.status}
                   </span>

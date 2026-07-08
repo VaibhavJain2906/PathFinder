@@ -158,11 +158,11 @@ const AdminDashboard = () => {
         <>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
             <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(168, 224, 99, 0.15)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Users size={24} /></div>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--accent-bg)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Users size={24} /></div>
               <div><p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Total Users</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalUsers}</h2></div>
             </div>
             <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(184, 169, 247, 0.15)', color: 'var(--secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Briefcase size={24} /></div>
+              <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'var(--accent-bg)', color: 'var(--secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Briefcase size={24} /></div>
               <div><p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Opportunities</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalOpportunities}</h2></div>
             </div>
             <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -238,7 +238,7 @@ const AdminDashboard = () => {
                 <tr key={user.id} style={{ borderBottom: '1px solid var(--border)' }}>
                   <td style={{ padding: '1rem', fontWeight: 500 }}>{user.email}</td>
                   <td style={{ padding: '1rem' }}>
-                    <span style={{ padding: '0.2rem 0.6rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600, background: 'rgba(184, 169, 247, 0.15)', color: 'var(--secondary)' }}>
+                    <span style={{ padding: '0.2rem 0.6rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600, background: 'var(--accent-bg)', color: 'var(--secondary)' }}>
                       {user.role}
                     </span>
                   </td>

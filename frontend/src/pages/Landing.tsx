@@ -61,7 +61,7 @@ const Landing = () => {
         <div className="hero-bg-glow-1"></div>
         <div className="hero-bg-glow-2"></div>
 
-        <div className="hero-content">
+        <div className="hero-content animate-fade-in-up">
           <div className="hero-badge">
             <span className="pulse-dot"></span>
             The Ultimate AI-Powered Opportunity Platform
@@ -76,7 +76,7 @@ const Landing = () => {
             Discover internships, scholarships, grants, and hackathons. Build your profile, manage applications, and leverage AI to craft the perfect pitch.
           </p>
 
-          <div className="hero-cta-group">
+          <div className="hero-cta-group animate-fade-in-up stagger-1">
             <Link to="/register" className="hero-btn-primary">
               Start for Free <ChevronRight size={20} />
             </Link>
@@ -85,7 +85,7 @@ const Landing = () => {
             </Link>
           </div>
 
-          <div className="stats-grid">
+          <div className="stats-grid animate-fade-in-up stagger-2">
             <div className="stat-item">
               <div className="stat-value">10k+</div>
               <div className="stat-label">Active Students</div>
@@ -108,7 +108,7 @@ const Landing = () => {
 
       {/* FEATURES SECTION */}
       <section id="features" className="section section-dark">
-        <div className="section-header">
+        <div className="section-header animate-fade-in-up">
           <h2 className="section-title">Everything you need to succeed</h2>
           <p className="section-subtitle">PathFinder centralizes the entire lifecycle of discovering and applying to opportunities, powered by advanced AI.</p>
         </div>
@@ -142,12 +142,12 @@ const Landing = () => {
 
       {/* HOW IT WORKS */}
       <section id="how-it-works" className="section">
-        <div className="section-header">
+        <div className="section-header animate-fade-in-up">
           <h2 className="section-title">How it works</h2>
           <p className="section-subtitle">A streamlined process whether you're a student seeking opportunities or an organization looking for talent.</p>
         </div>
 
-        <div className="how-it-works-container">
+        <div className="how-it-works-container animate-fade-in-up stagger-1">
           {/* Student Flow */}
           <div>
             <div className="step-group-title student">
@@ -233,12 +233,12 @@ const Landing = () => {
 
       {/* CATEGORIES */}
       <section id="categories" className="section section-dark">
-        <div className="section-header">
+        <div className="section-header animate-fade-in-up">
           <h2 className="section-title">Explore Categories</h2>
           <p className="section-subtitle">One platform for every type of opportunity you need to build your career.</p>
         </div>
 
-        <div className="categories-grid">
+        <div className="categories-grid animate-fade-in-up stagger-1">
           <div className="category-card">
             <Briefcase className="category-icon blue" />
             <h3 className="category-title">Internships</h3>

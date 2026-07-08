@@ -44,7 +44,7 @@ const Login = () => {
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem', background: 'var(--bg-page)' }}>
-      <div className="glass-card" style={{ width: '100%', maxWidth: '420px', position: 'relative', overflow: 'hidden' }}>
+      <div className="glass-card animate-fade-in-up" style={{ width: '100%', maxWidth: '420px', position: 'relative', overflow: 'hidden' }}>
         
         {/* Glow Effects */}
         <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '150px', height: '150px', background: 'rgba(168, 224, 99, 0.1)', filter: 'blur(50px)', borderRadius: '50%' }} />
