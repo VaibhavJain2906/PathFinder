@@ -98,7 +98,7 @@ const OrganizationDashboard = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
           <h1>Dashboard</h1>
-          <p style={{ color: 'var(--text-muted)' }}>Manage your opportunities and applicants.</p>
+          <p style={{ color: 'var(--text-secondary)' }}>Manage your opportunities and applicants.</p>
         </div>
         <button className="btn btn-primary" onClick={() => navigate('/org/post-opportunity')} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <PlusCircle size={18} /> Post New Opportunity
@@ -111,8 +111,8 @@ const OrganizationDashboard = () => {
             key={status}
             onClick={() => setFilter(status)}
             style={{
-              background: filter === status ? 'var(--surface-dark)' : 'transparent', border: 'none', padding: '0.6rem 1.25rem', cursor: 'pointer',
-              color: filter === status ? 'var(--primary)' : 'var(--text-main)',
+              background: filter === status ? 'var(--bg-surface)' : 'transparent', border: 'none', padding: '0.6rem 1.25rem', cursor: 'pointer',
+              color: filter === status ? 'var(--primary)' : 'var(--text-primary)',
               fontWeight: filter === status ? 700 : 500,
               borderRadius: '99px',
               transition: 'var(--transition)'
@@ -127,7 +127,7 @@ const OrganizationDashboard = () => {
         <p>Loading...</p>
       ) : filtered.length === 0 ? (
         <div className="glass-card" style={{ padding: '3rem', textAlign: 'center' }}>
-          <p style={{ color: 'var(--text-muted)' }}>No opportunities found in this category.</p>
+          <p style={{ color: 'var(--text-secondary)' }}>No opportunities found in this category.</p>
         </div>
       ) : (
         <div style={{ display: 'grid', gap: '1rem' }}>
@@ -139,12 +139,12 @@ const OrganizationDashboard = () => {
                   <span style={{ 
                     padding: '0.35rem 0.85rem', borderRadius: '99px', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.02em', textTransform: 'uppercase',
                     background: opp.status === 'PUBLISHED' ? 'rgba(168, 224, 99, 0.15)' : opp.status === 'DRAFT' ? 'rgba(251, 191, 36, 0.15)' : 'rgba(0, 0, 0, 0.05)',
-                    color: opp.status === 'PUBLISHED' ? '#4d8a1c' : opp.status === 'DRAFT' ? '#D97706' : 'var(--text-muted)'
+                    color: opp.status === 'PUBLISHED' ? '#4d8a1c' : opp.status === 'DRAFT' ? '#D97706' : 'var(--text-secondary)'
                   }}>
                     {opp.status}
                   </span>
                 </div>
-                <div style={{ display: 'flex', gap: '1.5rem', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                <div style={{ display: 'flex', gap: '1.5rem', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                     <Calendar size={14} /> Created: {new Date(opp.createdAt).toLocaleDateString()}
                   </span>

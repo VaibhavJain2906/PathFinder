@@ -9,12 +9,16 @@ import {
   Briefcase,
   BookOpen,
   Award,
-  ChevronRight
+  ChevronRight,
+  Sun,
+  Moon
 } from 'lucide-react';
 import './Landing.css';
+import { useTheme } from '../context/ThemeContext';
 
 const Landing = () => {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="landing-container">
@@ -34,6 +38,13 @@ const Landing = () => {
             <a href="#categories" className="nav-link">Categories</a>
 
             <div className="auth-buttons">
+              <button 
+                onClick={toggleTheme} 
+                style={{ background: 'transparent', border: 'none', color: 'var(--text-primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.5rem' }}
+                title="Toggle Theme"
+              >
+                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+              </button>
               <button onClick={() => navigate('/login')} className="btn-login">
                 Log in
               </button>

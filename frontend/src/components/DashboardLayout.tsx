@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { LogOut, LayoutDashboard, PlusCircle, User, Briefcase, Sparkles, PieChart, Search, Bell, Bookmark, Users, Compass } from 'lucide-react';
+import { LogOut, LayoutDashboard, PlusCircle, User, Briefcase, Sparkles, PieChart, Search, Bell, Bookmark, Users, Compass, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 'STUDENT' | 'ORGANIZATION' | 'ADMIN' }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [unreadCount, setUnreadCount] = useState(0);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const fetchUnread = async () => {
@@ -53,9 +55,9 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
     : [];
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-light)' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-page)' }}>
       {/* Sidebar - Dark Charcoal theme for confidence/contrast */}
-      <div style={{ width: '280px', background: 'var(--bg-dark)', borderRight: '1px solid rgba(255, 255, 255, 0.05)', display: 'flex', flexDirection: 'column', padding: '2rem 1.5rem', flexShrink: 0 }}>
+      <div style={{ width: '280px', background: 'var(--bg-sidebar)', borderRight: '1px solid var(--border-subtle)', display: 'flex', flexDirection: 'column', padding: '2rem 1.5rem', flexShrink: 0 }}>
         
         {/* Brand */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '3rem', cursor: 'pointer' }} onClick={() => navigate('/')}>
@@ -163,6 +165,27 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
         </nav>
 
         <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '1.5rem' }}>
+          <button 
+            onClick={toggleTheme} 
+            style={{ 
+              width: '100%', display: 'flex', gap: '0.5rem', justifyContent: 'center', alignItems: 'center',
+              padding: '0.85rem 1.25rem', borderRadius: '99px',
+              background: 'rgba(255, 255, 255, 0.05)', color: '#ffffff',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              fontWeight: 600, fontSize: '0.95rem', cursor: 'pointer', transition: 'var(--transition)',
+              marginBottom: '0.5rem'
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.1)';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.05)';
+            }}
+          >
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />} 
+            {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+          </button>
+          
           <button 
             onClick={handleLogout} 
             style={{ 

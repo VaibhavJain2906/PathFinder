@@ -1,7 +1,7 @@
 .landing-container {
   min-height: 100vh;
-  background-color: var(--bg-dark); /* Dark charcoal default */
-  color: #f5f0e8;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   display: flex;
   flex-direction: column;
@@ -12,9 +12,9 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(26, 26, 46, 0.85); /* var(--bg-dark) with opacity */
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .header-content {
@@ -36,7 +36,7 @@
 
 .logo-icon {
   background-color: var(--primary);
-  color: var(--bg-dark);
+  color: var(--bg-inverse);
   padding: 0.5rem;
   border-radius: 10px;
   display: flex;
@@ -49,7 +49,7 @@
   font-family: var(--font-sans);
   font-size: 1.4rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
 }
 
@@ -62,7 +62,7 @@
 .nav-link {
   font-size: 0.95rem;
   font-weight: 500;
-  color: #a0a0b0;
+  color: var(--text-secondary);
   text-decoration: none;
   transition: var(--transition);
 }
@@ -79,7 +79,7 @@
 
 .btn-login {
   background: transparent;
-  color: #ffffff;
+  color: var(--text-primary);
   border: none;
   font-size: 0.95rem;
   font-weight: 600;
@@ -96,7 +96,7 @@
 
 .btn-get-started {
   background: var(--primary);
-  color: var(--bg-dark);
+  color: var(--bg-inverse);
   border: none;
   font-size: 0.95rem;
   font-weight: 700;
@@ -119,7 +119,7 @@
   padding: 10rem 2rem 8rem;
   text-align: center;
   overflow: hidden;
-  background-color: var(--bg-dark);
+  background-color: var(--bg-sidebar); /* Keep hero dark */
 }
 
 /* Background image overlay instead of just blank space */
@@ -227,7 +227,7 @@
 
 .hero-btn-primary {
   background: var(--primary);
-  color: var(--bg-dark);
+  color: var(--bg-inverse);
   padding: 1.1rem 2.5rem;
   font-size: 1.1rem;
   font-weight: 700;
@@ -314,13 +314,13 @@
   padding: 8rem 2rem;
   position: relative;
   z-index: 10;
-  background-color: var(--bg-light); /* Warm off-white */
-  color: var(--text-main);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
 }
 
 .section-dark {
-  background-color: var(--bg-dark); /* Dark charcoal */
-  color: #f5f0e8;
+  background-color: var(--bg-alt);
+  color: var(--text-primary);
 }
 
 .section-header {
@@ -354,13 +354,13 @@
 }
 
 .feature-card {
-  background: var(--bg-dark); /* Dark card on warm bg */
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--bg-surface); /* Dark card on warm bg */
+  border: 1px solid var(--border-color);
   border-radius: 24px;
   padding: 2.5rem;
   transition: var(--transition);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  color: #f5f0e8;
+  color: var(--text-primary);
 }
 
 .feature-card:hover {
@@ -385,7 +385,7 @@
 .feature-card:hover .feature-icon-wrapper {
   transform: scale(1.1) rotate(5deg);
   background: var(--primary) !important;
-  color: var(--bg-dark) !important;
+  color: var(--bg-inverse) !important;
 }
 
 /* Remove original hardcoded colors and use theme colors */
@@ -448,7 +448,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  color: var(--bg-dark);
+  color: var(--bg-inverse);
   font-size: 1.1rem;
 }
 
@@ -458,12 +458,12 @@
 .step-line {
   width: 2px;
   height: 100%;
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--border-color);
   margin: 0.75rem 0;
 }
 
 .section-dark .step-line {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--border-color);
 }
 
 .step-content {
@@ -483,13 +483,14 @@
 }
 
 .org-card {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: 32px;
   padding: 3rem;
   position: relative;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
 }
 
 .org-glow {
@@ -512,8 +513,8 @@
 }
 
 .category-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   padding: 2.5rem 1.5rem;
   text-align: center;
@@ -523,10 +524,10 @@
 }
 
 .category-card:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-surface-hover);
   transform: translateY(-8px);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border-color: var(--primary);
+  box-shadow: 0 15px 30px var(--border-subtle);
 }
 
 .category-icon {
@@ -561,16 +562,16 @@
 
 /* Footer / CTA */
 .landing-footer {
-  background-color: #0d0d1a; /* Even darker for footer base */
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: var(--bg-sidebar); /* Even darker for footer base */
+  border-top: 1px solid var(--border-subtle);
   padding: 5rem 2rem 2rem 2rem;
   position: relative;
   z-index: 10;
-  color: #f5f0e8;
+  color: var(--text-on-dark);
 }
 
 .footer-cta {
-  background: var(--bg-dark);
+  background: var(--bg-sidebar);
   border-radius: 32px;
   padding: 4rem;
   display: flex;
@@ -580,7 +581,7 @@
   margin: 0 auto 5rem auto;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
@@ -615,7 +616,7 @@
 
 .footer-btn {
   background: var(--primary);
-  color: var(--bg-dark);
+  color: #1a1a2e; /* always dark for button */
   font-weight: 800;
   padding: 1.25rem 2.5rem;
   border-radius: 99px;

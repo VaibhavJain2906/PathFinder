@@ -125,7 +125,7 @@ const AdminDashboard = () => {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
           <h1>Admin Command Center</h1>
-          <p style={{ color: 'var(--text-muted)' }}>Platform analytics, user management, and system health.</p>
+          <p style={{ color: 'var(--text-secondary)' }}>Platform analytics, user management, and system health.</p>
         </div>
         <button className="btn btn-outline" onClick={handleExport} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Download size={18} /> Export Analytics (CSV)
@@ -142,8 +142,8 @@ const AdminDashboard = () => {
           <button
             key={tab.id} onClick={() => setActiveTab(tab.id as any)}
             style={{
-              background: activeTab === tab.id ? 'var(--surface-dark)' : 'transparent', border: 'none', padding: '0.6rem 1.25rem', cursor: 'pointer',
-              color: activeTab === tab.id ? 'var(--primary)' : 'var(--text-main)',
+              background: activeTab === tab.id ? 'var(--bg-surface)' : 'transparent', border: 'none', padding: '0.6rem 1.25rem', cursor: 'pointer',
+              color: activeTab === tab.id ? 'var(--primary)' : 'var(--text-primary)',
               fontWeight: activeTab === tab.id ? 700 : 500,
               borderRadius: '99px',
               transition: 'var(--transition)', display: 'flex', alignItems: 'center', gap: '0.5rem'
@@ -159,15 +159,15 @@ const AdminDashboard = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
             <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(168, 224, 99, 0.15)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Users size={24} /></div>
-              <div><p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Total Users</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalUsers}</h2></div>
+              <div><p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Total Users</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalUsers}</h2></div>
             </div>
             <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(184, 169, 247, 0.15)', color: 'var(--secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Briefcase size={24} /></div>
-              <div><p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Opportunities</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalOpportunities}</h2></div>
+              <div><p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Opportunities</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalOpportunities}</h2></div>
             </div>
             <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(6, 182, 212, 0.1)', color: '#06b6d4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><FileText size={24} /></div>
-              <div><p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Applications</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalApplications}</h2></div>
+              <div><p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.2rem' }}>Applications</p><h2 style={{ margin: 0, fontSize: '1.8rem' }}>{data.metrics.totalApplications}</h2></div>
             </div>
           </div>
 
@@ -200,7 +200,7 @@ const AdminDashboard = () => {
                       <p style={{ margin: 0, fontSize: '0.9rem' }}>
                         <strong>{app.student.firstName} {app.student.lastName}</strong> applied to <strong>{app.opportunity.title}</strong> at <strong>{app.opportunity.organization.companyName}</strong>
                       </p>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{new Date(app.createdAt).toLocaleString()}</span>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{new Date(app.createdAt).toLocaleString()}</span>
                     </div>
                   </div>
                 ))}
@@ -214,8 +214,8 @@ const AdminDashboard = () => {
         <div className="glass-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
             <h3 style={{ margin: 0 }}>All Users ({usersData.total})</h3>
-            <div style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-light)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.5rem 1rem' }}>
-              <Search size={18} color="var(--text-muted)" style={{ marginRight: '0.5rem' }} />
+            <div style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '0.5rem 1rem' }}>
+              <Search size={18} color="var(--text-secondary)" style={{ marginRight: '0.5rem' }} />
               <input 
                 type="text" placeholder="Search emails..." 
                 value={userSearch} onChange={e => setUserSearch(e.target.value)}
@@ -226,7 +226,7 @@ const AdminDashboard = () => {
           
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
             <thead>
-              <tr style={{ borderBottom: '2px solid var(--border)', textAlign: 'left', color: 'var(--text-muted)' }}>
+              <tr style={{ borderBottom: '2px solid var(--border-color)', textAlign: 'left', color: 'var(--text-secondary)' }}>
                 <th style={{ padding: '1rem' }}>Email</th>
                 <th style={{ padding: '1rem' }}>Role</th>
                 <th style={{ padding: '1rem' }}>Joined</th>
@@ -242,7 +242,7 @@ const AdminDashboard = () => {
                       {user.role}
                     </span>
                   </td>
-                  <td style={{ padding: '1rem', color: 'var(--text-muted)' }}>{new Date(user.createdAt).toLocaleDateString()}</td>
+                  <td style={{ padding: '1rem', color: 'var(--text-secondary)' }}>{new Date(user.createdAt).toLocaleDateString()}</td>
                   <td style={{ padding: '1rem', textAlign: 'right', display: 'flex', justifyContent: 'flex-end', gap: '0.5rem' }}>
                     <select 
                       className="form-input" style={{ width: 'auto', padding: '0.25rem 0.5rem', fontSize: '0.8rem' }}
@@ -267,8 +267,8 @@ const AdminDashboard = () => {
         <div className="glass-card">
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
             <h3 style={{ margin: 0 }}>All Published Opportunities</h3>
-            <div style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-light)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.5rem 1rem' }}>
-              <Search size={18} color="var(--text-muted)" style={{ marginRight: '0.5rem' }} />
+            <div style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '0.5rem 1rem' }}>
+              <Search size={18} color="var(--text-secondary)" style={{ marginRight: '0.5rem' }} />
               <input 
                 type="text" placeholder="Search opportunities..." 
                 value={oppSearch} onChange={e => setOppSearch(e.target.value)}
@@ -279,7 +279,7 @@ const AdminDashboard = () => {
 
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
             <thead>
-              <tr style={{ borderBottom: '2px solid var(--border)', textAlign: 'left', color: 'var(--text-muted)' }}>
+              <tr style={{ borderBottom: '2px solid var(--border-color)', textAlign: 'left', color: 'var(--text-secondary)' }}>
                 <th style={{ padding: '1rem' }}>Title</th>
                 <th style={{ padding: '1rem' }}>Organization</th>
                 <th style={{ padding: '1rem' }}>Category</th>
@@ -305,7 +305,7 @@ const AdminDashboard = () => {
               ))}
               {opportunitiesData.length === 0 && (
                 <tr>
-                  <td colSpan={4} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>No opportunities found.</td>
+                  <td colSpan={4} style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>No opportunities found.</td>
                 </tr>
               )}
             </tbody>
@@ -320,19 +320,19 @@ const AdminDashboard = () => {
               <Server size={20} /> Server Status
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <div style={{ background: 'var(--bg-light)', padding: '1rem', borderRadius: '8px' }}>
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.25rem' }}>Status</div>
+              <div style={{ background: 'var(--bg-surface-hover)', padding: '1rem', borderRadius: '8px' }}>
+                <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.25rem' }}>Status</div>
                 <div style={{ fontSize: '1.1rem', fontWeight: 600, color: '#10B981', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981' }}></div>
                   {healthData.status.toUpperCase()}
                 </div>
               </div>
-              <div style={{ background: 'var(--bg-light)', padding: '1rem', borderRadius: '8px' }}>
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.25rem' }}>Uptime</div>
+              <div style={{ background: 'var(--bg-surface-hover)', padding: '1rem', borderRadius: '8px' }}>
+                <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.25rem' }}>Uptime</div>
                 <div style={{ fontSize: '1.1rem', fontWeight: 600 }}>{Math.floor(healthData.uptime / 3600)}h {Math.floor((healthData.uptime % 3600) / 60)}m</div>
               </div>
-              <div style={{ background: 'var(--bg-light)', padding: '1rem', borderRadius: '8px' }}>
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.25rem' }}>Node Version</div>
+              <div style={{ background: 'var(--bg-surface-hover)', padding: '1rem', borderRadius: '8px' }}>
+                <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '0.25rem' }}>Node Version</div>
                 <div style={{ fontSize: '1.1rem', fontWeight: 600 }}>{healthData.nodeVersion}</div>
               </div>
             </div>
@@ -349,7 +349,7 @@ const AdminDashboard = () => {
                 { label: 'Total Applications', value: healthData.database.applications },
                 { label: 'Notifications Processed', value: healthData.database.notifications },
               ].map(item => (
-                <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.75rem', background: 'var(--bg-light)', borderRadius: '8px' }}>
+                <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.75rem', background: 'var(--bg-surface-hover)', borderRadius: '8px' }}>
                   <span style={{ fontWeight: 500 }}>{item.label}</span>
                   <span style={{ fontWeight: 700, color: 'var(--primary)' }}>{item.value.toLocaleString()}</span>
                 </div>

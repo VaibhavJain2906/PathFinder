@@ -101,17 +101,17 @@ const StudentDashboard = () => {
     <DashboardLayout role="STUDENT">
       <div style={{ marginBottom: '2rem' }}>
         <h1>Discover Opportunities</h1>
-        <p style={{ color: 'var(--text-muted)' }}>Find scholarships, internships, and programs that match your profile.</p>
+        <p style={{ color: 'var(--text-secondary)' }}>Find scholarships, internships, and programs that match your profile.</p>
       </div>
 
       {/* Search & Filters */}
       <div className="glass-card" style={{ padding: '1.25rem', marginBottom: '2rem' }}>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <div style={{ flex: '1 1 300px', display: 'flex', alignItems: 'center', background: 'var(--bg-white)', border: '1px solid var(--border)', borderRadius: '12px', padding: '0.5rem 1.25rem', boxShadow: 'var(--shadow-sm) inset', transition: 'var(--transition)' }}>
-            <Search size={20} style={{ color: 'var(--text-muted)', marginRight: '0.5rem', flexShrink: 0 }} />
+          <div style={{ flex: '1 1 300px', display: 'flex', alignItems: 'center', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '0.5rem 1.25rem', boxShadow: 'var(--shadow-sm) inset', transition: 'var(--transition)' }}>
+            <Search size={20} style={{ color: 'var(--text-secondary)', marginRight: '0.5rem', flexShrink: 0 }} />
             <input 
               type="text" placeholder="Search by title or description..." 
-              style={{ border: 'none', outline: 'none', background: 'transparent', width: '100%', fontSize: '0.95rem', color: 'var(--text-main)' }}
+              style={{ border: 'none', outline: 'none', background: 'transparent', width: '100%', fontSize: '0.95rem', color: 'var(--text-primary)' }}
               value={search} onChange={e => setSearch(e.target.value)}
             />
           </div>
@@ -136,7 +136,7 @@ const StudentDashboard = () => {
         <p>Loading...</p>
       ) : opportunities.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '3rem' }}>
-          <p style={{ color: 'var(--text-muted)' }}>No opportunities found matching your criteria.</p>
+          <p style={{ color: 'var(--text-secondary)' }}>No opportunities found matching your criteria.</p>
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))', gap: '1.5rem' }}>
@@ -145,7 +145,7 @@ const StudentDashboard = () => {
               {/* Bookmark */}
               <button onClick={() => toggleBookmark(opp.id)} style={{
                 position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem',
-                color: bookmarkedIds.includes(opp.id) ? 'var(--primary)' : 'var(--text-muted)'
+                color: bookmarkedIds.includes(opp.id) ? 'var(--primary)' : 'var(--text-secondary)'
               }}>
                 {bookmarkedIds.includes(opp.id) ? <BookmarkCheck size={20} /> : <Bookmark size={20} />}
               </button>
@@ -164,15 +164,15 @@ const StudentDashboard = () => {
               </div>
 
               <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', fontWeight: 800 }}>{opp.title}</h3>
-              <p style={{ color: 'var(--text-main)', fontWeight: 500, fontSize: '0.875rem', marginBottom: '0.75rem' }}>
+              <p style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.875rem', marginBottom: '0.75rem' }}>
                 {opp.organization.companyName}
               </p>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '1rem', flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {opp.description}
               </p>
               
               {/* Meta */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.25rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.25rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
                   <Calendar size={14} /> {opp.deadline ? new Date(opp.deadline).toLocaleDateString() : 'No deadline'}
                 </span>

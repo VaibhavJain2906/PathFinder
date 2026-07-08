@@ -1,21 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Color Palette - PathFinder Confident Theme */
+  /* Common Palette / Brand */
   --primary: #a8e063; /* Lime Green */
   --primary-hover: #8ecb4a;
   --secondary: #b8a9f7; /* Lavender */
   
-  --bg-light: #f5f0e8; /* Warm off-white */
-  --bg-dark: #1a1a2e; /* Dark charcoal */
-  
-  --bg-white: #ffffff; /* For cards in light sections */
-  
-  --text-main: #111827;
-  --text-muted: #6B7280;
-  
-  --border: #E5E7EB;
-
   --accent-bg: rgba(168, 224, 99, 0.15);
 
   /* Gradients */
@@ -25,30 +15,56 @@
   /* Typography */
   --font-sans: 'Inter', sans-serif;
 
-  /* Shadows & Glass */
+  /* Shadows */
   --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 8px 20px -4px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 20px 35px -5px rgba(0, 0, 0, 0.15), 0 10px 15px -5px rgba(0, 0, 0, 0.1);
   --shadow-primary: 0 8px 20px -4px rgba(168, 224, 99, 0.4);
-  
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.6);
 
   /* Transitions */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-light: #1a1a2e; /* Base background becomes dark charcoal */
-    --bg-white: #252542; /* Cards become slightly lighter charcoal */
-    --text-main: #f5f0e8;
-    --text-muted: #a0a0b0;
-    --border: #374151;
-    --glass-bg: rgba(37, 37, 66, 0.85);
-    --glass-border: rgba(255, 255, 255, 0.1);
-  }
+/* Light Theme Variables (Default) */
+:root, :root[data-theme="light"] {
+  --bg-page: #f5f0e8; /* Warm off-white */
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #fafafa;
+  --bg-sidebar: #1a1a2e; /* Dark sidebar in light mode */
+  --bg-alt: #ffffff;
+  --bg-inverse: #1a1a2e;
+  
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-on-dark: #f5f0e8;
+  --text-inverse: #f5f0e8;
+  
+  --border-color: #E5E7EB;
+  --border-subtle: rgba(0, 0, 0, 0.05);
+
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.6);
+}
+
+/* Dark Theme Variables */
+:root[data-theme="dark"] {
+  --bg-page: #1a1a2e; /* Dark charcoal */
+  --bg-surface: #252542; /* Lighter charcoal cards */
+  --bg-surface-hover: #2c2c4d;
+  --bg-sidebar: #121220; /* Very dark sidebar in dark mode */
+  --bg-alt: #121220;
+  --bg-inverse: #f5f0e8;
+  
+  --text-primary: #f5f0e8;
+  --text-secondary: #a0a0b0;
+  --text-on-dark: #f5f0e8;
+  --text-inverse: #1a1a2e;
+  
+  --border-color: #374151;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+
+  --glass-bg: rgba(37, 37, 66, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -59,10 +75,11 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg-light);
-  color: var(--text-main);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -70,6 +87,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   margin-bottom: 0.5rem;
   letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
 /* Layout */
@@ -125,8 +143,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-outline {
   background: transparent;
-  border: 2px solid var(--border);
-  color: var(--text-main);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .btn-outline:hover {
@@ -145,16 +163,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-main);
+  color: var(--text-primary);
 }
 
 .form-input {
   width: 100%;
   padding: 0.85rem 1.25rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
-  background-color: var(--bg-white);
-  color: var(--text-main);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   transition: var(--transition);
   box-shadow: var(--shadow-sm) inset;
