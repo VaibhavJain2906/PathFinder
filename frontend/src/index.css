@@ -28,7 +28,7 @@
 
 /* Light Theme Variables (Default) */
 :root, :root[data-theme="light"] {
-  --bg-page: #FAF6F0; /* Creamy off-white */
+  --bg-page: #EFE8DF; /* Slightly deeper creamy off-white for better card contrast */
   --bg-surface: #FFFFFF;
   --bg-surface-hover: #FDFCFB;
   --bg-sidebar: #2C2421; /* Rich Espresso */
