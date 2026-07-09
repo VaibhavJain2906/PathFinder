@@ -171,6 +171,26 @@ The project will be considered successful if:
 - The UI reflects the required premium Dark Mode and Glassmorphism aesthetic.
 - All core modules are integrated without breaking changes.
 
+## 17. API Architecture & Endpoints
+The platform utilizes a modular REST API built with Express.js. The endpoints are securely grouped by logical domains:
+
+### 17.1 Core Endpoints
+- **`/api/auth`**: Handles user authentication, including registration, login, and password reset functionalities. Employs JWT security and rate limiting.
+- **`/api/student`**: Manages student profile creation, skill tagging, certifications, portfolio links, and document retrieval.
+- **`/api/org`**: Manages organization profiles, branding (logos), and company details.
+- **`/api/admin`**: Secured routes for platform moderation, audit logs, and global data management.
+
+### 17.2 Opportunity & Application Endpoints
+- **`/api/opportunities`**: CRUD operations for internships, scholarships, and grants. Supports status management (Draft/Published) and category filtering.
+- **`/api/applications`**: Manages the core ATS workflow. Handles application submissions, status updates by organizations, withdrawal by students, and tracking timeline events.
+- **`/api/search`**: Dedicated endpoints for complex search queries and retrieving user's bookmarked opportunities.
+
+### 17.3 Utility & Integration Endpoints
+- **`/api/ai`**: Interfaces with the Google Gemini AI service. Exposes endpoints for resume parsing, tailored SOP generation, candidate summarization, and AI match scoring.
+- **`/api/notifications`**: Retrieves user-specific notifications, handles read/unread status updates, and fetches unread counts for UI badges.
+- **`/api/stats`**: Exposes aggregate platform data for public display (e.g., active student count, open opportunity count).
+- **`/api/upload` & `/api/files`**: Handles secure file uploads for resumes, transcripts, and organization logos using Multer, as well as role-based protected file serving.
+
 ---
 
 # Part 2 – Functional Requirements (Core Modules)
@@ -246,22 +266,3 @@ PathFinder includes a robust notification system designed to keep users informed
 - **Public Stats:** The dynamic landing page displays real-time platform statistics such as the total number of active students, open opportunities, and top organizations.
 - **Dashboard Metrics:** Students and organizations have access to quick metrics on their respective dashboards (e.g., total applications submitted, total candidates reviewed).
 
-## 17. API Architecture & Endpoints
-The platform utilizes a modular REST API built with Express.js. The endpoints are securely grouped by logical domains:
-
-### 17.1 Core Endpoints
-- **`/api/auth`**: Handles user authentication, including registration, login, and password reset functionalities. Employs JWT security and rate limiting.
-- **`/api/student`**: Manages student profile creation, skill tagging, certifications, portfolio links, and document retrieval.
-- **`/api/org`**: Manages organization profiles, branding (logos), and company details.
-- **`/api/admin`**: Secured routes for platform moderation, audit logs, and global data management.
-
-### 17.2 Opportunity & Application Endpoints
-- **`/api/opportunities`**: CRUD operations for internships, scholarships, and grants. Supports status management (Draft/Published) and category filtering.
-- **`/api/applications`**: Manages the core ATS workflow. Handles application submissions, status updates by organizations, withdrawal by students, and tracking timeline events.
-- **`/api/search`**: Dedicated endpoints for complex search queries and retrieving user's bookmarked opportunities.
-
-### 17.3 Utility & Integration Endpoints
-- **`/api/ai`**: Interfaces with the Google Gemini AI service. Exposes endpoints for resume parsing, tailored SOP generation, candidate summarization, and AI match scoring.
-- **`/api/notifications`**: Retrieves user-specific notifications, handles read/unread status updates, and fetches unread counts for UI badges.
-- **`/api/stats`**: Exposes aggregate platform data for public display (e.g., active student count, open opportunity count).
-- **`/api/upload` & `/api/files`**: Handles secure file uploads for resumes, transcripts, and organization logos using Multer, as well as role-based protected file serving.
