@@ -17,6 +17,7 @@ import aiRoutes from './routes/ai';
 import searchRoutes from './routes/search';
 import notificationRoutes from './routes/notifications';
 import adminRoutes from './routes/admin';
+import statsRoutes from './routes/stats';
 
 dotenv.config();
 
@@ -104,6 +105,7 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/stats', statsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

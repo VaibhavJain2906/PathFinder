@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   Compass,
@@ -19,6 +19,32 @@ import { useTheme } from '../context/ThemeContext';
 const Landing = () => {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+
+  const [stats, setStats] = useState({
+    activeStudents: 10000,
+    opportunities: 5000,
+    organizations: 500,
+    matchAccuracy: 98,
+    internships: 2300,
+    scholarships: 1100,
+    grants: 450,
+    hackathons: 89
+  });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/stats');
+        if (response.ok) {
+          const data = await response.json();
+          setStats(data);
+        }
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      }
+    };
+    fetchStats();
+  }, []);
 
   return (
     <div className="landing-container">
@@ -87,19 +113,19 @@ const Landing = () => {
 
           <div className="stats-grid animate-fade-in-up stagger-2">
             <div className="stat-item">
-              <div className="stat-value">10k+</div>
+              <div className="stat-value">{stats.activeStudents > 1000 ? `${(stats.activeStudents/1000).toFixed(1).replace('.0', '')}k+` : stats.activeStudents}</div>
               <div className="stat-label">Active Students</div>
             </div>
             <div className="stat-item">
-              <div className="stat-value">5,000+</div>
+              <div className="stat-value">{stats.opportunities > 1000 ? `${(stats.opportunities/1000).toFixed(1).replace('.0', '')}k+` : stats.opportunities}</div>
               <div className="stat-label">Opportunities</div>
             </div>
             <div className="stat-item">
-              <div className="stat-value">500+</div>
+              <div className="stat-value">{stats.organizations > 100 ? `${stats.organizations}+` : stats.organizations}</div>
               <div className="stat-label">Top Organizations</div>
             </div>
             <div className="stat-item">
-              <div className="stat-value">98%</div>
+              <div className="stat-value">{stats.matchAccuracy}%</div>
               <div className="stat-label">Match Accuracy</div>
             </div>
           </div>
@@ -242,25 +268,25 @@ const Landing = () => {
           <div className="category-card">
             <Briefcase className="category-icon blue" />
             <h3 className="category-title">Internships</h3>
-            <p className="category-count">2,300+ open</p>
+            <p className="category-count">{stats.internships} open</p>
           </div>
 
           <div className="category-card">
             <BookOpen className="category-icon green" />
             <h3 className="category-title">Scholarships</h3>
-            <p className="category-count">1,100+ open</p>
+            <p className="category-count">{stats.scholarships} open</p>
           </div>
 
           <div className="category-card">
             <Award className="category-icon yellow" />
             <h3 className="category-title">Grants</h3>
-            <p className="category-count">450+ open</p>
+            <p className="category-count">{stats.grants} open</p>
           </div>
 
           <div className="category-card">
             <Compass className="category-icon pink" />
             <h3 className="category-title">Hackathons</h3>
-            <p className="category-count">89+ open</p>
+            <p className="category-count">{stats.hackathons} open</p>
           </div>
         </div>
       </section>
