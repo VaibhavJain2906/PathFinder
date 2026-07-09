@@ -3,7 +3,7 @@ import DashboardLayout from '../components/DashboardLayout';
 import { Bell, CheckCircle, ExternalLink, Calendar, Building, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const API = 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 const getToken = () => localStorage.getItem('token');
 const getRole = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');

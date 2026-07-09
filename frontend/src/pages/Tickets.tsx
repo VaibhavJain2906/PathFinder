@@ -24,7 +24,7 @@ export default function Tickets() {
   const fetchTickets = async () => {
     try {
       const endpoint = isAdmin ? '/api/tickets/admin' : '/api/tickets/mine';
-      const res = await fetch(`http://localhost:5000${endpoint}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${endpoint}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       if (res.ok) {
@@ -41,7 +41,7 @@ export default function Tickets() {
   const handleCreateTicket = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/tickets', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/tickets`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

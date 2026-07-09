@@ -3,7 +3,7 @@ import DashboardLayout from '../components/DashboardLayout';
 import { PlusCircle, Users, Edit3, Trash2, Calendar, Copy, Archive, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const API = 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 const getToken = () => localStorage.getItem('token');
 
 interface Opportunity {

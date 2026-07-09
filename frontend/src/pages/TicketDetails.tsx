@@ -18,7 +18,7 @@ export default function TicketDetails() {
 
   const fetchTicket = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/tickets/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/tickets/${id}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       if (res.ok) {
@@ -37,7 +37,7 @@ export default function TicketDetails() {
     if (!newMessage.trim()) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/tickets/${id}/messages`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/tickets/${id}/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export default function TicketDetails() {
   const handleStatusChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newStatus = e.target.value;
     try {
-      const res = await fetch(`http://localhost:5000/api/tickets/${id}/status`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/tickets/${id}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

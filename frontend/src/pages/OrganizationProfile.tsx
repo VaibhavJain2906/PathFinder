@@ -14,7 +14,7 @@ const OrganizationProfile = () => {
       // but we can add that to backend or just fetch it here. Wait, we don't have a GET /api/org/profile endpoint in backend!
       // I'll need to fetch the user and their profile.
       // Let's assume we'll use a new GET /api/org/profile route.
-      const res = await fetch('http://localhost:5000/api/org/profile', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/org/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) setProfile(await res.json());
@@ -31,7 +31,7 @@ const OrganizationProfile = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await fetch('http://localhost:5000/api/org/profile', {
+      await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/org/profile`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify({ 
@@ -56,7 +56,7 @@ const OrganizationProfile = () => {
       const formData = new FormData();
       formData.append('file', e.target.files[0]);
       
-      const uploadRes = await fetch('http://localhost:5000/api/upload', {
+      const uploadRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/upload`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData

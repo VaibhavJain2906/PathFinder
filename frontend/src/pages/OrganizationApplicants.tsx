@@ -3,7 +3,7 @@ import DashboardLayout from '../components/DashboardLayout';
 import { useParams } from 'react-router-dom';
 import { User, Calendar, FileText, Check, X, Clock, Mail, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
 
-const API = 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 const getToken = () => localStorage.getItem('token');
 
 interface Skill { name: string; }

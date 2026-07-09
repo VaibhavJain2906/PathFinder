@@ -7,7 +7,7 @@ interface Cert { id: string; name: string; issuer: string; dateIssued?: string; 
 interface PortLink { id: string; title: string; url: string; }
 interface Doc { id: string; title: string; fileUrl: string; type: string; }
 
-const API = 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 const getToken = () => localStorage.getItem('token');
 const authHeaders = () => ({
   'Content-Type': 'application/json',
