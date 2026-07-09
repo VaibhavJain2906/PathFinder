@@ -27,6 +27,8 @@ model User {
   aiGenerations       AIGeneration[]
   savedSearches       SavedSearch[]
   auditLogs           AuditLog[]
+  tickets             Ticket[]
+  ticketMessages      TicketMessage[]
 }
 
 model StudentProfile {
@@ -208,4 +210,30 @@ model AuditLog {
   createdAt DateTime @default(now())
 
   user User? @relation(fields: [userId], references: [id])
+}
+
+model Ticket {
+  id          String   @id @default(uuid())
+  subject     String
+  description String
+  status      String   @default("OPEN") // 'OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED'
+  type        String   @default("OTHER") // 'BUG', 'REPORT', 'FEATURE_REQUEST', 'OTHER'
+  priority    String   @default("MEDIUM") // 'LOW', 'MEDIUM', 'HIGH'
+  creatorId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  creator     User            @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  messages    TicketMessage[]
+}
+
+model TicketMessage {
+  id        String   @id @default(uuid())
+  ticketId  String
+  senderId  String
+  message   String
+  createdAt DateTime @default(now())
+
+  ticket Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  sender User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
 }

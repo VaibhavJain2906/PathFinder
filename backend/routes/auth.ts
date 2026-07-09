@@ -79,7 +79,7 @@ router.post('/forgot-password', async (req, res) => {
     const resetTokenExpiry = new Date(Date.now() + 3600000);
     await prisma.user.update({ where: { email }, data: { resetToken, resetTokenExpiry } });
 
-    const resetLink = `http://localhost:5174/reset-password?token=${resetToken}`;
+    const resetLink = `http://localhost:5173/reset-password?token=${resetToken}`;
     const info = await transporter.sendMail({
       from: '"PathFinder Support" <noreply@pathfinder.com>',
       to: email,

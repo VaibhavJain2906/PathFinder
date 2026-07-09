@@ -18,6 +18,7 @@ import searchRoutes from './routes/search';
 import notificationRoutes from './routes/notifications';
 import adminRoutes from './routes/admin';
 import statsRoutes from './routes/stats';
+import ticketRoutes from './routes/tickets';
 
 dotenv.config();
 
@@ -106,6 +107,7 @@ app.use('/api/search', searchRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/stats', statsRoutes);
+app.use('/api/tickets', ticketRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

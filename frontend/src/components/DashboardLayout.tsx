@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { LogOut, LayoutDashboard, PlusCircle, User, Briefcase, Sparkles, PieChart, Search, Bell, Bookmark, Users, Compass, Sun, Moon } from 'lucide-react';
+import { LogOut, LayoutDashboard, PlusCircle, User, Briefcase, Sparkles, PieChart, Search, Bell, Bookmark, Users, Compass, Sun, Moon, LifeBuoy } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 'STUDENT' | 'ORGANIZATION' | 'ADMIN' }) => {
@@ -160,6 +160,29 @@ const DashboardLayout = ({ children, role }: { children: React.ReactNode, role: 
                   {unreadCount > 9 ? '9+' : unreadCount}
                 </span>
               )}
+            </Link>
+            <Link to="/tickets" style={{
+              display: 'flex', alignItems: 'center', gap: '0.85rem',
+              padding: '0.85rem 1.25rem', borderRadius: '12px',
+              background: location.pathname.startsWith('/tickets') ? 'var(--accent-bg)' : 'transparent',
+              color: location.pathname.startsWith('/tickets') ? 'var(--primary)' : '#a0a0b0',
+              textDecoration: 'none', fontWeight: location.pathname.startsWith('/tickets') ? 600 : 500, fontSize: '0.95rem',
+              transition: 'var(--transition)',
+              border: location.pathname.startsWith('/tickets') ? '1px solid var(--accent-bg)' : '1px solid transparent'
+            }}
+            onMouseEnter={e => {
+              if (!location.pathname.startsWith('/tickets')) {
+                (e.currentTarget as HTMLElement).style.color = 'var(--primary)';
+                (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.03)';
+              }
+            }}
+            onMouseLeave={e => {
+              if (!location.pathname.startsWith('/tickets')) {
+                (e.currentTarget as HTMLElement).style.color = '#a0a0b0';
+                (e.currentTarget as HTMLElement).style.background = 'transparent';
+              }
+            }}>
+              <LifeBuoy size={20} /> Support Tickets
             </Link>
           </div>
         </nav>
