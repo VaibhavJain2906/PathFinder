@@ -2,7 +2,7 @@ import { Router } from 'express';
 import prisma from '../lib/prisma';
 import { authenticate, requireRole, type AuthRequest } from '../middleware/auth';
 import multer from 'multer';
-import pdfParse from 'pdf-parse';
+const pdfParse = require('pdf-parse');
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const router = Router();
