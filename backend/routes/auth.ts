@@ -79,15 +79,31 @@ router.post('/forgot-password', async (req, res) => {
     const resetTokenExpiry = new Date(Date.now() + 3600000);
     await prisma.user.update({ where: { email }, data: { resetToken, resetTokenExpiry } });
 
-    const resetLink = `http://localhost:5173/reset-password?token=${resetToken}`;
-    const info = await transporter.sendMail({
-      from: '"PathFinder Support" <noreply@pathfinder.com>',
-      to: email,
-      subject: 'Password Reset Request',
-      text: `Reset your password: ${resetLink}`,
-      html: `<p>Click to reset: <a href="${resetLink}">${resetLink}</a></p>`,
-    });
-    console.log('Password reset email sent: %s', nodemailer.getTestMessageUrl(info));
+    const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/reset-password?token=${resetToken}`;
+    
+    // Render blocks outbound SMTP ports, so ethereal will hang. 
+    // We log the link to the console so it can be copied during testing.
+    console.log('\n----------------------------------------');
+    console.log('PASSWORD RESET LINK (Copy this):');
+    console.log(resetLink);
+    console.log('----------------------------------------\n');
+
+    try {
+      // Try to send email, but timeout quickly to prevent hanging
+      await Promise.race([
+        transporter.sendMail({
+          from: '"PathFinder Support" <noreply@pathfinder.com>',
+          to: email,
+          subject: 'Password Reset Request',
+          text: `Reset your password: ${resetLink}`,
+          html: `<p>Click to reset: <a href="${resetLink}">${resetLink}</a></p>`,
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('SMTP timeout')), 5000))
+      ]);
+    } catch (e) {
+      console.log('Note: Email sending skipped/timed out (expected on free Render tier). Use the link logged above.');
+    }
+
     res.json({ message: 'If an account exists, a reset link was sent.' });
   } catch (error) {
     console.error(error);
