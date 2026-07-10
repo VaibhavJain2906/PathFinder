@@ -21,7 +21,7 @@ router.post('/parse-resume', authenticate, requireRole('STUDENT'), upload.single
 
     // Use Gemini if available
     if (genAI) {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
       const prompt = `
         Extract the following information from the provided resume text and return ONLY a valid JSON object.
         If a field is missing, set its value to null or empty string appropriately.
