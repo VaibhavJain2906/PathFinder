@@ -40,7 +40,7 @@ router.post('/parse-resume', authenticate, requireRole('STUDENT'), upload.single
       `;
       const result = await model.generateContent(prompt);
       let responseText = result.response.text();
-      responseText = responseText.replace(/```json/g, '').replace(/```/g, '').trim();
+      responseText = responseText.replace(/```json/gi, '').replace(/```/g, '').trim();
       const parsedData = JSON.parse(responseText);
       return res.json(parsedData);
     } else {

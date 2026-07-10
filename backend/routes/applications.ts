@@ -70,7 +70,7 @@ router.post('/', authenticate, requireRole('STUDENT'), async (req: AuthRequest, 
             `;
             const result = await model.generateContent(prompt);
             let responseText = result.response.text();
-            responseText = responseText.replace(/```json/g, '').replace(/```/g, '').trim();
+            responseText = responseText.replace(/```json/gi, '').replace(/```/g, '').trim();
             const parsedData = JSON.parse(responseText);
             score = parsedData.matchScore || 0;
             reason = parsedData.matchReason || "AI generated fit score based on profile and opportunity requirements.";
