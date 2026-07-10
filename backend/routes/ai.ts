@@ -21,15 +21,34 @@ router.post('/parse-resume', authenticate, requireRole('STUDENT'), upload.single
 
     // Use Gemini if available
     if (genAI) {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${process.env.GEMINI_API_KEY}`);
-      const data = await response.json();
-      
-      if (data.error) {
-        throw new Error("API Key Error: " + data.error.message);
-      }
-      
-      const models = data.models ? data.models.map((m: any) => m.name.replace('models/', '')).join(', ') : 'No models found';
-      throw new Error("AVAILABLE MODELS: " + models);
+      // Using gemini-flash-latest to automatically use the best available flash model
+      const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+      const prompt = `
+        Extract the following information from the provided resume text and return ONLY a valid JSON object.
+        If a field is missing, set its value to null or empty string appropriately.
+        
+        Required JSON structure:
+        {
+          "firstName": "string",
+          "lastName": "string",
+          "university": "string",
+          "graduationYear": number,
+          "major": "string",
+          "bio": "string",
+          "skills": ["string"]
+        }
+        
+        Resume text:
+        ${text.substring(0, 5000)} // Limit text to avoid token limits
+      `;
+
+      const result = await model.generateContent(prompt);
+      let responseText = result.response.text();
+
+      // Try to parse the JSON response
+      responseText = responseText.replace(/```json/gi, '').replace(/```/g, '').trim();
+      const parsedData = JSON.parse(responseText);
+      return res.json(parsedData);
     } else {
       // Mock fallback if no API key
       await new Promise(r => setTimeout(r, 1500));
@@ -45,16 +64,7 @@ router.post('/parse-resume', authenticate, requireRole('STUDENT'), upload.single
     }
   } catch (error: any) {
     console.error('Error parsing resume:', error);
-    // Return 200 so the frontend doesn't show a generic toast, but instead fills the error into the bio field
-    return res.status(200).json({
-      firstName: "Error",
-      lastName: "Occurred",
-      university: "",
-      graduationYear: 2024,
-      major: "",
-      bio: "DEBUG MESSAGE: " + (error?.message || String(error)),
-      skills: []
-    });
+    res.status(500).json({ error: 'Failed to parse resume', details: error?.message || String(error) });
   }
 });
 
