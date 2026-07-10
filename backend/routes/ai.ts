@@ -2,7 +2,7 @@ import { Router } from 'express';
 import prisma from '../lib/prisma';
 import { authenticate, requireRole, type AuthRequest } from '../middleware/auth';
 import multer from 'multer';
-const pdfParse = require('pdf-parse');
+const { PDFParse } = require('pdf-parse');
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const router = Router();
@@ -15,7 +15,8 @@ router.post('/parse-resume', authenticate, requireRole('STUDENT'), upload.single
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
     
     // Parse PDF
-    const pdfData = await pdfParse(req.file.buffer);
+    const parser = new PDFParse({ data: req.file.buffer });
+    const pdfData = await parser.getText();
     const text = pdfData.text;
 
     // Use Gemini if available
