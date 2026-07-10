@@ -21,26 +21,47 @@ router.post('/parse-resume', authenticate, requireRole('STUDENT'), upload.single
 
     // Use Gemini if available
     if (genAI) {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+      const modelsToTry = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-1.5-flash-8b", "gemini-pro"];
+      let responseText = "";
+
       const prompt = `
         Extract the following information from the provided resume text and return ONLY a valid JSON object.
         If a field is missing, set its value to null or empty string appropriately.
-        JSON format:
+        
+        Required JSON structure:
         {
           "firstName": "string",
           "lastName": "string",
-          "bio": "string (1-2 sentences summarizing their professional profile)",
-          "major": "string",
           "university": "string",
           "graduationYear": number,
-          "skills": ["string", "string"]
+          "major": "string",
+          "bio": "string",
+          "skills": ["string"]
         }
-
-        Resume Text:
-        ${text}
+        
+        Resume text:
+        ${text.substring(0, 5000)} // Limit text to avoid token limits
       `;
-      const result = await model.generateContent(prompt);
-      let responseText = result.response.text();
+
+      let lastError = null;
+      for (const modelName of modelsToTry) {
+        try {
+          const model = genAI.getGenerativeModel({ model: modelName });
+          const result = await model.generateContent(prompt);
+          responseText = result.response.text();
+          break; // Success, exit loop
+        } catch (err: any) {
+          console.warn(`Model ${modelName} failed:`, err?.message || String(err));
+          lastError = err;
+          // Continue to the next model
+        }
+      }
+
+      if (!responseText) {
+        throw new Error(`All Gemini models failed. Last error: ${lastError?.message || String(lastError)}`);
+      }
+
+      // Try to parse the JSON response
       responseText = responseText.replace(/```json/gi, '').replace(/```/g, '').trim();
       const parsedData = JSON.parse(responseText);
       return res.json(parsedData);
