@@ -57,9 +57,9 @@ router.post('/parse-resume', authenticate, requireRole('STUDENT'), upload.single
         skills: ["JavaScript", "React", "Mocking"]
       });
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error parsing resume:', error);
-    res.status(500).json({ error: 'Failed to parse resume' });
+    res.status(500).json({ error: 'Failed to parse resume', details: error?.message || String(error) });
   }
 });
 
