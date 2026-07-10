@@ -80,7 +80,16 @@ router.post('/parse-resume', authenticate, requireRole('STUDENT'), upload.single
     }
   } catch (error: any) {
     console.error('Error parsing resume:', error);
-    res.status(500).json({ error: 'Failed to parse resume', details: error?.message || String(error) });
+    // Return 200 so the frontend doesn't show a generic toast, but instead fills the error into the bio field
+    return res.status(200).json({
+      firstName: "Error",
+      lastName: "Occurred",
+      university: "",
+      graduationYear: 2024,
+      major: "",
+      bio: "DEBUG MESSAGE: " + (error?.message || String(error)),
+      skills: []
+    });
   }
 });
 
